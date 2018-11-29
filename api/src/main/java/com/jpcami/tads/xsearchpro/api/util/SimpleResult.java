@@ -5,6 +5,8 @@ import java.util.List;
 
 public class SimpleResult {
 
+    private Integer id;
+
     private String message;
 
     private List<String> errorMessages;
@@ -25,6 +27,13 @@ public class SimpleResult {
         this.errorMessages = errorMessages;
     }
 
+    public static SimpleResult success(Integer id) {
+        SimpleResult result = new SimpleResult();
+        result.setMessage("Operação realizada com sucesso");
+        result.setId(id);
+        return result;
+    }
+
     public static SimpleResult success() {
         SimpleResult result = new SimpleResult();
         result.setMessage("Operação realizada com sucesso");
@@ -43,5 +52,13 @@ public class SimpleResult {
         result.setMessage("Erro de validação");
         result.setErrorMessages(messages);
         return result;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

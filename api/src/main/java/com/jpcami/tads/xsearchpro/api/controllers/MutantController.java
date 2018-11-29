@@ -50,7 +50,7 @@ public class MutantController {
         return ResponseEntity.ok(repository.findAll());
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "mutants", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SimpleResult> add(@RequestBody @Valid Mutant mutant) {
         mutant.setId(null);
 
@@ -81,6 +81,7 @@ public class MutantController {
             }
 
             transactionManager.commit(status);
+            return ResponseEntity.ok(SimpleResult.success(saved.getId().intValue()));
 
         }
         catch (Exception e) {
@@ -88,7 +89,7 @@ public class MutantController {
             throw e;
         }
 
-        return ResponseEntity.ok(SimpleResult.success());
+
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -129,13 +130,13 @@ public class MutantController {
             }
 
             transactionManager.commit(status);
+
+            return ResponseEntity.ok(SimpleResult.success());
         }
         catch (Exception e) {
             transactionManager.rollback(status);
             throw e;
         }
-
-        return ResponseEntity.ok(SimpleResult.success());
     }
 
     @DeleteMapping(value = "mutants/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

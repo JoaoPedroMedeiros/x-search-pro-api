@@ -35,8 +35,8 @@ public class SkillController {
             return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(SimpleResult.validation("Já existe uma habilidade cadastrada com esse nome"));
         }
 
-        repository.save(skill);
+        Skill saved = repository.save(skill);
 
-        return ResponseEntity.ok(SimpleResult.success());
+        return ResponseEntity.ok(SimpleResult.success(saved.getId().intValue()));
     }
 }
